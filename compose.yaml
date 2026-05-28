@@ -1,0 +1,20 @@
+services:
+  terminal:
+    build:
+      context: .
+      args:
+        ALMALINUX_VERSION: ${ALMALINUX_VERSION:-10}
+        TTYD_VERSION: ${TTYD_VERSION:-1.7.7}
+    environment:
+      USERNAME: ${TERMINAL_USERNAME:-admin}
+      PASSWORD: ${TERMINAL_PASSWORD:-secret}
+      WORKSPACE_DIR: ${WORKSPACE_DIR:-/root/workspace}
+      TZ: ${TZ:-Asia/Jakarta}
+    ports:
+      - "${PORT:-7681}:7681"
+    volumes:
+      - workspace:/root/workspace
+    restart: unless-stopped
+
+volumes:
+  workspace:

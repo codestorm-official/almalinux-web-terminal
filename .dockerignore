@@ -1,0 +1,6 @@
+.git
+.codex
+.agents
+.env
+*.log
+README.local.md
