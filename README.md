@@ -22,6 +22,7 @@ ALMALINUX_VERSION=10
 USERNAME=admin
 PASSWORD=use-a-strong-password
 WORKSPACE_DIR=/root/workspace
+TTYD_WRITABLE=true
 TZ=Asia/Jakarta
 ```
 
@@ -50,6 +51,7 @@ Common values are `10`, `9`, `8`, or any valid tag published by the official Alm
 | `PASSWORD` | none | Browser terminal password. The app exits if this is missing. |
 | `PORT` | `7681` | Web terminal port. Railway injects this automatically. |
 | `WORKSPACE_DIR` | `/root/workspace` | Directory opened when the shell starts. Mount a Railway volume here for persistence. |
+| `TTYD_WRITABLE` | `true` | Enables browser keyboard input. Set to `false` for readonly mode. |
 | `TZ` | none | Optional timezone, for example `Asia/Jakarta`. |
 | `TTYD_VERSION` | `1.7.7` | `ttyd` release downloaded during build. |
 
@@ -94,6 +96,20 @@ For Railway, mount a volume to:
 ```
 
 Files saved there will survive redeploys when a volume is attached.
+
+## Troubleshooting
+
+If the page opens but you cannot type, check the deploy logs. This line means the terminal is readonly:
+
+```text
+The --writable option is not set, will start in readonly mode
+```
+
+Set `TTYD_WRITABLE=true` and redeploy. The startup log should show:
+
+```text
+Input mode: writable
+```
 
 ## Security Notes
 

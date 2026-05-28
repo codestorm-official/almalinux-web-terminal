@@ -9,6 +9,7 @@ services:
       USERNAME: ${TERMINAL_USERNAME:-admin}
       PASSWORD: ${TERMINAL_PASSWORD:-secret}
       WORKSPACE_DIR: ${WORKSPACE_DIR:-/root/workspace}
+      TTYD_WRITABLE: ${TTYD_WRITABLE:-true}
       TZ: ${TZ:-Asia/Jakarta}
     ports:
       - "${PORT:-7681}:7681"

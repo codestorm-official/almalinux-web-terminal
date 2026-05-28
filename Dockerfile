@@ -9,6 +9,7 @@ ENV ALMALINUX_VERSION="${ALMALINUX_VERSION}" \
     TTYD_VERSION="${TTYD_VERSION}" \
     PORT="7681" \
     USERNAME="admin" \
+    TTYD_WRITABLE="true" \
     WORKSPACE_DIR="/root/workspace" \
     LANG="C.UTF-8" \
     LC_ALL="C.UTF-8" \
