@@ -10,6 +10,8 @@ ENV ALMALINUX_VERSION="${ALMALINUX_VERSION}" \
     PORT="7681" \
     USERNAME="admin" \
     TTYD_WRITABLE="true" \
+    SHOW_WELCOME="true" \
+    WELCOME_COMMAND="almalinux-welcome" \
     WORKSPACE_DIR="/root/workspace" \
     LANG="C.UTF-8" \
     LC_ALL="C.UTF-8" \
@@ -64,7 +66,9 @@ RUN set -eux; \
     rm -rf /var/cache/dnf
 
 COPY entrypoint.sh /usr/local/bin/almalinux-web-terminal
-RUN chmod +x /usr/local/bin/almalinux-web-terminal
+COPY almalinux-welcome.sh /usr/local/bin/almalinux-welcome
+COPY almalinux-web-terminal-profile.sh /etc/profile.d/almalinux-web-terminal.sh
+RUN chmod +x /usr/local/bin/almalinux-web-terminal /usr/local/bin/almalinux-welcome
 
 WORKDIR /root/workspace
 EXPOSE 7681

@@ -7,6 +7,7 @@ Deploy AlmaLinux as a browser-accessible terminal using Docker and `ttyd`. This 
 - AlmaLinux terminal in the browser.
 - Basic authentication through `USERNAME` and `PASSWORD`.
 - Dynamic AlmaLinux tag through `ALMALINUX_VERSION`.
+- Startup welcome screen with AlmaLinux system info.
 - Railway-ready Dockerfile and config-as-code.
 - Persistent workspace path at `/root/workspace`.
 - Optional Docker Compose setup for local testing.
@@ -23,6 +24,8 @@ USERNAME=admin
 PASSWORD=use-a-strong-password
 WORKSPACE_DIR=/root/workspace
 TTYD_WRITABLE=true
+SHOW_WELCOME=true
+WELCOME_COMMAND=almalinux-welcome
 TZ=Asia/Jakarta
 ```
 
@@ -52,6 +55,8 @@ Common values are `10`, `9`, `8`, or any valid tag published by the official Alm
 | `PORT` | `7681` | Web terminal port. Railway injects this automatically. |
 | `WORKSPACE_DIR` | `/root/workspace` | Directory opened when the shell starts. Mount a Railway volume here for persistence. |
 | `TTYD_WRITABLE` | `true` | Enables browser keyboard input. Set to `false` for readonly mode. |
+| `SHOW_WELCOME` | `true` | Shows the startup system info screen when the terminal opens. |
+| `WELCOME_COMMAND` | `almalinux-welcome` | Command used for the startup screen. |
 | `TZ` | none | Optional timezone, for example `Asia/Jakarta`. |
 | `TTYD_VERSION` | `1.7.7` | `ttyd` release downloaded during build. |
 
@@ -96,6 +101,20 @@ For Railway, mount a volume to:
 ```
 
 Files saved there will survive redeploys when a volume is attached.
+
+## Welcome Screen
+
+The container prints an AlmaLinux system summary automatically when the web terminal opens. Disable it with:
+
+```env
+SHOW_WELCOME=false
+```
+
+To use your own startup command, set:
+
+```env
+WELCOME_COMMAND=your-command
+```
 
 ## Troubleshooting
 
